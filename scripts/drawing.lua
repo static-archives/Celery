@@ -6,7 +6,7 @@
     local TextService = xcloneref(game:GetService("TextService"))
     local HttpService = xcloneref(game:GetService("HttpService"))
 
-    local HttpGet = xclonefunction(game.HttpGet)
+    local HttpGet = xclonefunction(_httpget)
     local GetTextBoundsAsync = xclonefunction(TextService.GetTextBoundsAsync)
 
     -- // Drawing
