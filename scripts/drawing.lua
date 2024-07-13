@@ -6,7 +6,7 @@
     local TextService = xcloneref(game:GetService("TextService"))
     local HttpService = xcloneref(game:GetService("HttpService"))
 
-    local HttpGet = xclonefunction(_httpget)
+    local HttpGet = xclonefunction(senv.httpget)
     local GetTextBoundsAsync = xclonefunction(TextService.GetTextBoundsAsync)
 
     -- // Drawing
@@ -43,26 +43,26 @@
         else
             local TempPath = HttpService:GenerateGUID(false)
 
-            if not isfile(FontData) then
-                writefile(`DrawingFontCache/{FontName}.ttf`, crypt.base64.decode(FontData))
+            if not senv.isfile(FontData) then
+                senv.writefile(`DrawingFontCache/{FontName}.ttf`, senv.crypt.base64.decode(FontData))
                 FontData = `DrawingFontCache/{FontName}.ttf`
             end
         
-            writefile(TempPath, HttpService:JSONEncode({
+            senv.writefile(TempPath, HttpService:JSONEncode({
                 ["name"] = FontName,
                 ["faces"] = {
                     {
                         ["name"] = "Regular",
                         ["weight"] = 100,
                         ["style"] = "normal",
-                        ["assetId"] = getcustomasset(FontData)
+                        ["assetId"] = senv.getcustomasset(FontData)
                     }
                 }
             }))
 
-            FontObject = Font.new(getcustomasset(TempPath), Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+            FontObject = Font.new(senv.getcustomasset(TempPath), Enum.FontWeight.Regular, Enum.FontStyle.Normal)
 
-            delfile(TempPath)
+            senv.delfile(TempPath)
         end
 
         if not FontObject then
@@ -117,7 +117,7 @@
         DisplayOrder = 10,
         Name = HttpService:GenerateGUID(false),
         ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
-        Parent = gethui()
+        Parent = senv.gethui()
     })
 
     Drawing.__TEXT_BOUND_PARAMS = Drawing.CreateInstance("GetTextBoundsParams", { Width = math.huge })
@@ -679,9 +679,9 @@
             if not Drawing.__IMAGE_CACHE[data] then
                 local TempPath = HttpService:GenerateGUID(false)
 
-                writefile(TempPath, data)
-                Drawing.__IMAGE_CACHE[data] = getcustomasset(TempPath)
-                delfile(TempPath)
+                senv.writefile(TempPath, data)
+                Drawing.__IMAGE_CACHE[data] = senv.getcustomasset(TempPath)
+                senv.delfile(TempPath)
             end
 
             self.__PROPERTIES.Data = Drawing.__IMAGE_CACHE[data]
@@ -1000,8 +1000,8 @@
     end
     --#endregion
 
-    if not isfolder("DrawingFontCache") then
-        makefolder("DrawingFontCache")
+    if not senv.isfolder("DrawingFontCache") then
+        senv.makefolder("DrawingFontCache")
     end
 
     Drawing.Font.new("UI", "rbxasset://fonts/families/Arial.json")
