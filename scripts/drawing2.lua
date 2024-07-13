@@ -74,7 +74,7 @@ Drawing.new = function(Type) -- Drawing.new
                 rawset(self, key, value)
                 a.Visible = value
             elseif key == 'Color' and typeof(value) == 'Color3' then
-                rawset(self, key, value)
+                pcall(function() rawset(self, key, value) end)
                 a.BackgroundColor3 = value
             elseif key == 'Transparency' and typeof(value) == 'number' and value <= 1 then
                 rawset(self, key, value)
@@ -131,9 +131,9 @@ Drawing.new = function(Type) -- Drawing.new
                 rawset(self, key, value)
                 a.Visible = value
             elseif key == 'Color' and typeof(value) == 'Color3' then
-                rawset(self, key, value)
+                pcall(function() rawset(self, key, value) end)
                 a.BackgroundColor3 = value
-                b.Color = value
+                pcall(function() b.Color = value end)
             elseif key == 'Position' and typeof(value) == 'Vector2' then
                 rawset(self, key, value)
                 self:updateSquare()
@@ -194,9 +194,9 @@ Drawing.new = function(Type) -- Drawing.new
                 rawset(self, key, value)
                 a.Visible = value
             elseif key == 'Color' and typeof(value) == 'Color3' then
-                rawset(self, key, value)
+                pcall(function() rawset(self, key, value) end)
                 a.BackgroundColor3 = value
-                a.Color = value
+                pcall(function() a.Color = value end)
             elseif key == 'Transparency' and typeof(value) == 'number' then
                 rawset(self, key, value)
                 a.BackgroundTransparency = 1 - value
@@ -276,7 +276,7 @@ Drawing.new = function(Type) -- Drawing.new
                 rawset(self, key, value)
                 a.Visible = value
             elseif key == 'Color' and typeof(value) == 'Color3' then
-                rawset(self, key, value)
+                pcall(function() rawset(self, key, value) end)
             elseif key == 'Transparency' and typeof(value) == 'number' then
                 rawset(self, key, value)
             elseif key == 'Position' and typeof(value) == 'Vector2' then
@@ -342,7 +342,7 @@ Drawing.new = function(Type) -- Drawing.new
             if key == 'Visible' and typeof(value) == 'boolean' then
                 rawset(self, key, value)
             elseif key == 'Color' and typeof(value) == 'Color3' then
-                rawset(self, key, value)
+                pcall(function() rawset(self, key, value) end)
             elseif key == 'Transparency' and typeof(value) == 'number' then
                 rawset(self, key, value)
             elseif key == 'Position' and typeof(value) == 'Vector2' then
