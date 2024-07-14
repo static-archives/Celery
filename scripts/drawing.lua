@@ -41,6 +41,9 @@
         if string.sub(FontData, 1, 11) == "rbxasset://" then
             FontObject = Font.new(FontData, Enum.FontWeight.Regular, Enum.FontStyle.Normal)
         else
+            --[[ lets not use custom fonts, they're too resourceful. sorryyy ]]
+            FontObject = Font.new("Arial", Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+            --[[
             local TempPath = HttpService:GenerateGUID(false)
 
             if not senv.isfile(FontData) then
@@ -63,6 +66,7 @@
             FontObject = Font.new(senv.getcustomasset(TempPath), Enum.FontWeight.Regular, Enum.FontStyle.Normal)
 
             senv.delfile(TempPath)
+            ]]
         end
 
         if not FontObject then
